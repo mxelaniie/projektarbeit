@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import { Header } from "./Header.jsx";
+import { Footer } from "./Footer.jsx";
+import { Sidebar } from "./Sidebar.jsx";
+import { MainArea } from "./MainArea.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
+export function App() {
+  const [Dropdown, setDropdown] = useState("fuchs");
+  const [Checkbox, setCheckbox] = useState();
+  const [eingabe, seteingabe] = useState("");
+  const wappen =
+    "https://upload.wikimedia.org/wikipedia/commons/a/af/Z%C3%BCrich.png";
+  const [count, setCount] = useState(0);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      <Header
+        Dropdown={Dropdown}
+        setDropdown={setDropdown}
+        Checkbox={Checkbox}
+        setCheckbox={setCheckbox}
+        eingabe={eingabe}
+        seteingabe={seteingabe}
+        wappen={wappen}
+      />
+      <Sidebar eingabe={eingabe} setCount={setCount} count={count} />
+      <MainArea eingabe={eingabe} count={count} />
+      <Footer eingabe={eingabe} setCount={setCount} />
+    </div>
+  );
 }
-
-export default App
