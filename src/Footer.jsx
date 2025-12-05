@@ -1,7 +1,7 @@
-export const Footer = ({ setCount, eingabe }) => {
+export const Footer = ({ eingabe }) => {
   return (
     <footer style={{ backgroundColor: eingabe }}>
-      <button onClick={() => setCount(0)}>Reset</button>
+      <div>Alina Portmann, Melanie Schiefermüller</div>
     </footer>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { Header } from "./Header.jsx";
 import { Footer } from "./Footer.jsx";
@@ -6,27 +6,53 @@ import { Sidebar } from "./Sidebar.jsx";
 import { MainArea } from "./MainArea.jsx";
 
 export function App() {
-  const [Dropdown, setDropdown] = useState("fuchs");
   const [Checkbox, setCheckbox] = useState();
   const [eingabe, seteingabe] = useState("");
   const wappen =
     "https://upload.wikimedia.org/wikipedia/commons/a/af/Z%C3%BCrich.png";
-  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState("");
+  const [orte, setOrte] = useState([]);
+  const [selectedOrt, setSelectedOrt] = useState("Bahnhofstrasse (Mitte)");
+  const [daten, setDaten] = useState([]);
+
+  // Orte laden
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/orte")
+      .then((res) => res.json())
+      .then((data) => setOrte(data));
+  }, []);
+
+  // Daten für den ausgewählten Ort laden
+  useEffect(() => {
+    fetch(
+      `http://127.0.0.1:8000/analyse/kinder_anteil?analyseort=${selectedOrt}`
+    )
+      .then((res) => res.json())
+      .then((data) => setDaten(data));
+  }, [selectedOrt]);
+
+  // Hallo Message laden
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/hallo")
+      .then((res) => res.json())
+      .then((data) => setMessage(data));
+  }, []);
 
   return (
     <div className="app">
       <Header
-        Dropdown={Dropdown}
-        setDropdown={setDropdown}
         Checkbox={Checkbox}
         setCheckbox={setCheckbox}
         eingabe={eingabe}
         seteingabe={seteingabe}
         wappen={wappen}
+        orte={orte}
+        selectedOrt={selectedOrt}
+        setSelectedOrt={setSelectedOrt}
       />
-      <Sidebar eingabe={eingabe} setCount={setCount} count={count} />
-      <MainArea eingabe={eingabe} count={count} />
-      <Footer eingabe={eingabe} setCount={setCount} />
+      <Sidebar eingabe={eingabe} message={message} selectedOrt={selectedOrt} />
+      <MainArea eingabe={eingabe} selectedOrt={selectedOrt} daten={daten} />
+      <Footer />
     </div>
   );
 }

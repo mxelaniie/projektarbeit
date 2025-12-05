@@ -1,7 +1,8 @@
-export const Sidebar = ({ eingabe, setCount, count }) => {
+export const Sidebar = ({ eingabe, message, selectedOrt }) => {
   return (
     <aside style={{ backgroundColor: eingabe }}>
-      <button onClick={() => setCount(count + 1)}>Count</button>
+      <div>{message}</div>
+      <div>Ausgewählter Ort: {selectedOrt}</div>
     </aside>
   );
 };

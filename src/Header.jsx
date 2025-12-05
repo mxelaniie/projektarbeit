@@ -1,11 +1,12 @@
 export const Header = ({
-  Dropdown,
-  setDropdown,
   Checkbox,
   setCheckbox,
   eingabe,
   seteingabe,
   wappen,
+  orte,
+  selectedOrt,
+  setSelectedOrt,
 }) => {
   return (
     <header>
@@ -17,7 +18,7 @@ export const Header = ({
             flexDirection: "row",
             width: "100%",
             border: Checkbox ? "2px solid black" : "",
-            justifyContent: "space-between",
+            justifyContent: "left",
             backgroundColor: eingabe,
             fontFamily: "Arial, sans-serif",
             alignItems: "center",
@@ -28,7 +29,7 @@ export const Header = ({
           <input
             type="text"
             id="text"
-            placeholder="Hintergrundfarbe eingeben"
+            placeholder="Hintergrund wählen (blue)"
             onChange={(event) => seteingabe(event.target.value)}
           />
           <input
@@ -38,13 +39,12 @@ export const Header = ({
           />
           <p> Rahmen </p>
           <select
-            className="Dropdown"
-            id="dropdown"
-            onChange={(event) => setDropdown(event.target.value)}
+            value={selectedOrt} // Wert Dropdown = ausgewählter Ort
+            onChange={(e) => setSelectedOrt(e.target.value)}
           >
-            <option value="fuchs">Fuchs</option>
-            <option value="eule">Eule</option>
-            <option value="spatz">Spatz</option>
+            {orte.map((ort) => (
+              <option key={ort}>{ort}</option>
+            ))}
           </select>
         </div>
       </div>
