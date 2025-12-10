@@ -10,6 +10,8 @@ export function App() {
   const [eingabe, seteingabe] = useState("");
   const wappen =
     "https://upload.wikimedia.org/wikipedia/commons/a/af/Z%C3%BCrich.png";
+  const zuerich =
+    "https://bahnhofstrasse-zuerich.ch/wp-content/uploads/2024/10/zh_bahnhofstrasse_lucy-459-2-scaled.jpg";
   const [message, setMessage] = useState("");
   const [orte, setOrte] = useState([]);
   const [selectedOrt, setSelectedOrt] = useState("Bahnhofstrasse (Mitte)");
@@ -46,6 +48,7 @@ export function App() {
         eingabe={eingabe}
         seteingabe={seteingabe}
         wappen={wappen}
+        zuerich={zuerich}
         orte={orte}
         selectedOrt={selectedOrt}
         setSelectedOrt={setSelectedOrt}

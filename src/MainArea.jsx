@@ -61,15 +61,15 @@ export const MainArea = ({ eingabe, selectedOrt, daten }) => {
       y: { field, type: "quantitative", title }, // quantitative = numerische Werte
       color: { value: "steelblue" },
     },
-    width: 420,
-    height: 240,
+    width: 820,
+    height: 540,
     title: `${title}: ${selectedOrt}`,
   });
 
   return (
-    <main style={{ backgroundColor: eingabe, padding: "20px" }}>
+    <main style={{ backgroundColor: eingabe, padding: "20px",  textAlign: "center"}}>
       <h2>Anzahl Fussgänger in {selectedOrt}</h2>
-      <div style={{ display: "flex", gap: 20 }}>
+      <div style={{ display: "flex", gap: 20, justifyContent: "center" }}>
         <VegaEmbed
           spec={Spec("child", "Kinder")}
           options={{ mode: "vega-lite" }}
