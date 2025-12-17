@@ -19,6 +19,7 @@ app = FastAPI()
 origins = [
     "http://localhost:5173",
     "http://localhost:5174", # falls zwei laufen
+    "https://projektarbeit-one.vercel.app/" #damit Vercel zugreifen kann
 ]
 
 app.add_middleware(
