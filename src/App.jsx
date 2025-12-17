@@ -19,7 +19,7 @@ export function App() {
 
   // Orte laden
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/orte")
+    fetch("https://backend-rouge-gamma-83.vercel.app/orte")
       .then((res) => res.json())
       .then((data) => setOrte(data));
   }, []);
@@ -27,7 +27,7 @@ export function App() {
   // Daten für den ausgewählten Ort laden
   useEffect(() => {
     fetch(
-      `http://127.0.0.1:8000/analyse/kinder_anteil?analyseort=${selectedOrt}`
+      `https://backend-rouge-gamma-83.vercel.app/analyse/kinder_anteil?analyseort=${selectedOrt}`
     )
       .then((res) => res.json())
       .then((data) => setDaten(data));
@@ -35,7 +35,7 @@ export function App() {
 
   // Hallo Message laden
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/hallo")
+    fetch("https://backend-rouge-gamma-83.vercel.app/hallo")
       .then((res) => res.json())
       .then((data) => setMessage(data));
   }, []);
