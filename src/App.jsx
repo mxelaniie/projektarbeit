@@ -49,6 +49,7 @@ export function App() {
         eingabe={eingabe}
         selectedOrt={selectedOrt}
         backgroundColor={backgroundColor}
+        daten={daten}
       />
       <MainArea
         selectedOrt={selectedOrt}

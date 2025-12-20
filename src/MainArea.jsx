@@ -17,69 +17,49 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
     "Dec",
   ];
 
-  // Monat extrahieren
   const Monat = (d) => parseInt(d.timestamp.substring(5, 7));
 
-  // Daten extrahieren und Monatsnamen hinzufügen
-  const selectedData = daten.map((d) => ({
-    // map geht jedes Element durch wie eine for Schleife
-    month_num: Monat(d),
-    month_name: monthNames[Monat(d) - 1],
-    child: d.child,
-    adult: d.adult,
-  }));
-
-  // Aggregation pro Monat
+  // Daten aggregieren
   const aggMap = {};
-  selectedData.map((r) => {
-    const key = r.month_num;
+  daten.forEach((d) => {
+    const key = Monat(d);
     aggMap[key] = aggMap[key] || {
-      // || gibt ersten truthy Wert zurück, wenn das erste stimmt wird es zurückgegeben, ansonsten das zweite
-      month_num: r.month_num, // wenn der Monat schon existiert, wird er nicht überschrieben
-      month_name: r.month_name,
+      month_num: key,
+      month_name: monthNames[key - 1],
       child: 0,
       adult: 0,
     };
-    aggMap[key].child += r.child; // Werte aufsummieren
-    aggMap[key].adult += r.adult;
-    return r;
+    aggMap[key].child += d.child;
+    aggMap[key].adult += d.adult;
+  });
+  const agg = Object.values(aggMap).sort((a, b) => a.month_num - b.month_num);
+
+  // Kinderanteil berechnen
+  const dataWithShare = agg.map((d) => {
+    const total = d.child + d.adult;
+    return { month_name: d.month_name, share: total > 0 ? d.child / total : 0 };
   });
 
-  const agg = Object.values(aggMap).sort((a, b) => a.month_num - b.month_num);
-  // Object.values, weil map kein Array zurückgibt sondern ein Objekt
-  // wenn a-b negativ ist, kommt a vor b, wenn positiv b vor a
-
-  // Long-Format für gestapelte Balken (Kinder + Erwachsene)
-  const longData = agg.flatMap((d) => [
-    { month_name: d.month_name, category: "Kinder", value: d.child },
-    { month_name: d.month_name, category: "Erwachsene", value: d.adult },
-  ]);
-
-  // Spec für gestapelte Balken
   const Spec = {
-    data: { values: longData },
+    data: { values: dataWithShare },
     mark: "bar",
     encoding: {
       x: {
         field: "month_name",
         type: "ordinal",
-        sort: monthNames, // sortiert Reihenfolge gemäss Array
+        sort: monthNames,
         title: "Monat",
       },
       y: {
-        field: "value",
+        field: "share",
         type: "quantitative",
-        title: "Anzahl Fussgänger",
-      }, // quantitative = numerische Werte
-      color: {
-        field: "category",
-        type: "nominal",
-        title: "Kategorie",
-        scale: { range: ["steelblue", "orange"] }, // Farben für Kinder/Erwachsene
+        title: "Kinderanteil",
+        axis: { format: ".0%" },
       },
+      color: { value: "steelblue" },
     },
-    width: 820,
-    height: 540,
+    width: 600,
+    height: 200,
   };
 
   return (
@@ -90,7 +70,7 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
         textAlign: "center",
       }}
     >
-      <h2>Anteil der Kinder in {selectedOrt}</h2>
+      <h3>Kinderanteil an Fussgängern in {selectedOrt}</h3>
       <VegaEmbed spec={Spec} options={{ mode: "vega-lite" }} />
     </main>
   );
