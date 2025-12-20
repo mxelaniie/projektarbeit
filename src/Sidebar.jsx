@@ -50,7 +50,6 @@ export const Sidebar = ({ backgroundColor, daten = [] }) => {
       style={{
         backgroundColor: backgroundColor,
         padding: "10px",
-        width: "250px",
       }}
     >
       <h5>Zahlen pro Monat:</h5>
