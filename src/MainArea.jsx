@@ -22,7 +22,7 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
 
   // Daten extrahieren und Monatsnamen hinzufügen
   const selectedData = daten.map((d) => ({
-    //map geht jedes Element durch wie eine for Schleife
+    // map geht jedes Element durch wie eine for Schleife
     month_num: Monat(d),
     month_name: monthNames[Monat(d) - 1],
     child: d.child,
@@ -34,8 +34,8 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
   selectedData.map((r) => {
     const key = r.month_num;
     aggMap[key] = aggMap[key] || {
-      // || gibt ersten truthy wert zurück, wenn das erste stimmt wird es zurückgegeben, ansonsten das zweite
-      month_num: r.month_num, // wenn der monat schon existiert, wird er nicht überschrieben
+      // || gibt ersten truthy Wert zurück, wenn das erste stimmt wird es zurückgegeben, ansonsten das zweite
+      month_num: r.month_num, // wenn der Monat schon existiert, wird er nicht überschrieben
       month_name: r.month_name,
       child: 0,
       adult: 0,
@@ -45,11 +45,19 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
     return r;
   });
 
-  const agg = Object.values(aggMap).sort((a, b) => a.month_num - b.month_num); // Object. weil map kein Array zurückgibt sondern ein Objekt
+  const agg = Object.values(aggMap).sort((a, b) => a.month_num - b.month_num);
+  // Object.values, weil map kein Array zurückgibt sondern ein Objekt
   // wenn a-b negativ ist, kommt a vor b, wenn positiv b vor a
 
-  const Spec = (field, title) => ({
-    data: { values: agg },
+  // Long-Format für gestapelte Balken (Kinder + Erwachsene)
+  const longData = agg.flatMap((d) => [
+    { month_name: d.month_name, category: "Kinder", value: d.child },
+    { month_name: d.month_name, category: "Erwachsene", value: d.adult },
+  ]);
+
+  // Spec für gestapelte Balken
+  const Spec = {
+    data: { values: longData },
     mark: "bar",
     encoding: {
       x: {
@@ -58,13 +66,21 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
         sort: monthNames, // sortiert Reihenfolge gemäss Array
         title: "Monat",
       },
-      y: { field, type: "quantitative", title }, // quantitative = numerische Werte
-      color: { value: "steelblue" },
+      y: {
+        field: "value",
+        type: "quantitative",
+        title: "Anzahl Fussgänger",
+      }, // quantitative = numerische Werte
+      color: {
+        field: "category",
+        type: "nominal",
+        title: "Kategorie",
+        scale: { range: ["steelblue", "orange"] }, // Farben für Kinder/Erwachsene
+      },
     },
     width: 820,
     height: 540,
-    title: `${title}: ${selectedOrt}`,
-  });
+  };
 
   return (
     <main
@@ -74,17 +90,8 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
         textAlign: "center",
       }}
     >
-      <h2>Anzahl Fussgänger in {selectedOrt}</h2>
-      <div style={{ display: "flex", gap: 20, justifyContent: "center" }}>
-        <VegaEmbed
-          spec={Spec("child", "Kinder")}
-          options={{ mode: "vega-lite" }}
-        />
-        <VegaEmbed
-          spec={Spec("adult", "Erwachsene")}
-          options={{ mode: "vega-lite" }}
-        />
-      </div>
+      <h2>Anteil der Kinder in {selectedOrt}</h2>
+      <VegaEmbed spec={Spec} options={{ mode: "vega-lite" }} />
     </main>
   );
 };
