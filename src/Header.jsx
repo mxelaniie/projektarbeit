@@ -7,6 +7,10 @@ export const Header = ({
   selectedOrt,
   setSelectedOrt,
   backgroundColor,
+  jahre,
+  selectedJahr,
+  setSelectedJahr,
+
 }) => {
   return (
     <header>
@@ -33,6 +37,16 @@ export const Header = ({
           >
             {orte.map((ort) => (
               <option key={ort}>{ort}</option>
+            ))}
+          </select>
+          Bitte Jahr wählen:
+          <select
+            value={selectedJahr}
+            onChange={(e) => setSelectedJahr(e.target.value)}
+            style={{ padding: "5px" }}
+          >
+            {jahre.map((jahr) => (
+              <option key={jahr}>{jahr}</option>
             ))}
           </select>
           Design wählen:

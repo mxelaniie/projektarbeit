@@ -16,6 +16,8 @@ export function App() {
   const [daten, setDaten] = useState([]);
   const backgroundColor =
     eingabe === "Grau" ? "#b4b4b4" : eingabe === "FH" ? "#f4d03f" : "";
+  const jahre = ["2021", "2022", "2023", "2024", "2025"];
+  const [selectedJahr, setSelectedJahr] = useState("2025");
 
   // Orte laden
   useEffect(() => {
@@ -44,6 +46,9 @@ export function App() {
         selectedOrt={selectedOrt}
         setSelectedOrt={setSelectedOrt}
         backgroundColor={backgroundColor}
+        jahre={jahre}                   
+        selectedJahr={selectedJahr}     
+        setSelectedJahr={setSelectedJahr}
       />
       <Sidebar
         eingabe={eingabe}
