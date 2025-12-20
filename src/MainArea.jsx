@@ -1,7 +1,7 @@
 import React from "react";
 import { VegaEmbed } from "react-vega";
 
-export const MainArea = ({ eingabe, selectedOrt, daten, backgroundColor }) => {
+export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
   const monthNames = [
     "Jan",
     "Feb",
