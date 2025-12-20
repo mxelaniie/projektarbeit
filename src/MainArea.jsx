@@ -58,8 +58,8 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
       },
       color: { value: "steelblue" },
     },
-    width: 600,
-    height: 200,
+    width: 800,
+    height: 300,
   };
 
   return (

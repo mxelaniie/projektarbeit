@@ -1,4 +1,4 @@
-export const Sidebar = ({ selectedOrt, backgroundColor, daten = [] }) => {
+export const Sidebar = ({ backgroundColor, daten = [] }) => {
   const monthNames = [
     "Jan",
     "Feb",
@@ -17,7 +17,6 @@ export const Sidebar = ({ selectedOrt, backgroundColor, daten = [] }) => {
   if (daten.length === 0) {
     return (
       <aside style={{ backgroundColor: backgroundColor, padding: "10px" }}>
-        <div>Ausgewählter Ort: {selectedOrt}</div>
         <div>Keine Daten vorhanden</div>
       </aside>
     );
@@ -54,7 +53,6 @@ export const Sidebar = ({ selectedOrt, backgroundColor, daten = [] }) => {
         width: "250px",
       }}
     >
-      <div>Ausgewählter Ort: {selectedOrt}</div>
       <h5>Zahlen pro Monat:</h5>
       <ul>
         {agg.map((d) => (

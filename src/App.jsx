@@ -47,7 +47,6 @@ export function App() {
       />
       <Sidebar
         eingabe={eingabe}
-        selectedOrt={selectedOrt}
         backgroundColor={backgroundColor}
         daten={daten}
       />

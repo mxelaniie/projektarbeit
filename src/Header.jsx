@@ -22,7 +22,7 @@ export const Header = ({
             </div>
           </div>
 
-          <img src={zuerich} width={400} height={70} />
+          <img src={zuerich} width={300} height={70} />
         </div>
 
         <div className="header-controls" style={{ backgroundColor }}>
