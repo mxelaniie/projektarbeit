@@ -54,7 +54,7 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
         field: "share",
         type: "quantitative",
         title: "Kinderanteil",
-        axis: { format: ".0%" },
+        axis: { format: ".1%" }, //.1 bedeutet eine Nachkommastelle in Prozent
       },
       color: { value: "steelblue" },
     },
