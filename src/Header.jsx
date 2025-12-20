@@ -32,7 +32,10 @@ export const Header = ({
           }}
         >
           <img src={wappen} width={60} height={70} />
-          <div style={{ fontWeight: "bold", fontSize: "30px" }}>Passanten Zürich</div>
+          <div style={{ fontWeight: "bold", fontSize: "30px" }}>
+            Fokusfrage: Wann ist der Anteil der Kinder im Vergleich zu den
+            erwachsenen Fussgängern am grössten an der Bahnhofstrasse Mitte?
+          </div>
           <img src={zuerich} width={400} height={70} />
         </div>
 
@@ -46,7 +49,8 @@ export const Header = ({
             width: "100%",
           }}
         >
-          Bitte Ort wählen:<select
+          Bitte Ort wählen:
+          <select
             value={selectedOrt}
             onChange={(e) => setSelectedOrt(e.target.value)}
             style={{ padding: "5px" }}
@@ -55,7 +59,8 @@ export const Header = ({
               <option key={ort}>{ort}</option>
             ))}
           </select>
-          Hintergrund wählen:<input
+          Hintergrund wählen:
+          <input
             type="color"
             value={eingabe}
             onChange={(event) => seteingabe(event.target.value)}
@@ -70,7 +75,6 @@ export const Header = ({
             />
             Rahmen
           </label>
-          
         </div>
       </div>
     </header>
