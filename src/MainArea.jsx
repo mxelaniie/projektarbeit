@@ -1,7 +1,7 @@
 import React from "react";
 import { VegaEmbed } from "react-vega";
 
-export const MainArea = ({ eingabe, selectedOrt, daten }) => {
+export const MainArea = ({ eingabe, selectedOrt, daten, backgroundColor }) => {
   const monthNames = [
     "Jan",
     "Feb",
@@ -67,7 +67,13 @@ export const MainArea = ({ eingabe, selectedOrt, daten }) => {
   });
 
   return (
-    <main style={{ backgroundColor: eingabe, padding: "20px",  textAlign: "center"}}>
+    <main
+      style={{
+        backgroundColor: backgroundColor,
+        padding: "20px",
+        textAlign: "center",
+      }}
+    >
       <h2>Anzahl Fussgänger in {selectedOrt}</h2>
       <div style={{ display: "flex", gap: 20, justifyContent: "center" }}>
         <VegaEmbed

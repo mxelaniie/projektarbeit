@@ -1,6 +1,4 @@
 export const Header = ({
-  Checkbox,
-  setCheckbox,
   eingabe,
   seteingabe,
   wappen,
@@ -8,6 +6,7 @@ export const Header = ({
   orte,
   selectedOrt,
   setSelectedOrt,
+  backgroundColor,
 }) => {
   return (
     <header>
@@ -16,9 +15,8 @@ export const Header = ({
         style={{
           display: "flex",
           flexDirection: "column",
+          backgroundColor: backgroundColor,
           width: "100%",
-          border: Checkbox ? "2px solid black" : "",
-          backgroundColor: eingabe,
           fontFamily: "Arial, sans-serif",
         }}
       >
@@ -32,9 +30,39 @@ export const Header = ({
           }}
         >
           <img src={wappen} width={60} height={70} />
-          <div style={{ fontWeight: "bold", fontSize: "30px" }}>
-            Fokusfrage: Wann ist der Anteil der Kinder im Vergleich zu den
-            erwachsenen Fussgängern am grössten an der Bahnhofstrasse Mitte?
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+              flex: 1,
+              padding: "0 20px",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "26px",
+                fontWeight: "bold",
+                color: "#444",
+                marginBottom: "6px",
+              }}
+            >
+              Fokusfrage:
+            </div>
+            <div
+              style={{
+                fontSize: "18px",
+                fontWeight: "",
+                color: "#444",
+                marginBottom: "6px",
+                lineHeight: "1.3",
+                maxWidth: "900px",
+              }}
+            >
+              Wann ist der Anteil der Kinder im Vergleich zu den erwachsenen
+              Fussgängern am grössten an der Bahnhofstrasse Mitte?
+            </div>
           </div>
           <img src={zuerich} width={400} height={70} />
         </div>
@@ -45,7 +73,8 @@ export const Header = ({
             alignItems: "center",
             gap: "20px",
             padding: "10px 20px",
-            backgroundColor: "#7db7d6",
+            backgroundColor: backgroundColor,
+            border: "px solid black",
             width: "100%",
           }}
         >
@@ -59,22 +88,16 @@ export const Header = ({
               <option key={ort}>{ort}</option>
             ))}
           </select>
-          Hintergrund wählen:
-          <input
-            type="color"
+          Design wählen:
+          <select
             value={eingabe}
-            onChange={(event) => seteingabe(event.target.value)}
+            onChange={(e) => seteingabe(e.target.value)}
             style={{ padding: "5px" }}
-          />
-          <label style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-            <input
-              type="checkbox"
-              id="Checkbox"
-              checked={Checkbox}
-              onChange={() => setCheckbox(!Checkbox)}
-            />
-            Rahmen
-          </label>
+          >
+            <option value="Standard">Standard</option>
+            <option value="Grau">Grau</option>
+            <option value="FH">FH</option>
+          </select>
         </div>
       </div>
     </header>

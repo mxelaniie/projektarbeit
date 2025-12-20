@@ -26,13 +26,6 @@ main {
   background: white;
 }
 
-#Checkbox {
-  height: 20x;
-  width: 20px;
-  color: #007cc3;
-  cursor: pointer;
-}
-
 #text {
   font-family: "Arial", sans-serif;
   cursor: pointer;

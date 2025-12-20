@@ -1,7 +1,6 @@
-export const Sidebar = ({ eingabe, message, selectedOrt }) => {
+export const Sidebar = ({ selectedOrt, backgroundColor }) => {
   return (
-    <aside style={{ backgroundColor: eingabe }}>
-      <div>{message}</div>
+    <aside style={{ backgroundColor: backgroundColor }}>
       <div>Ausgewählter Ort: {selectedOrt}</div>
     </aside>
   );
