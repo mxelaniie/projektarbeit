@@ -22,7 +22,7 @@ export const Header = ({
             <div className="header-title-main">Fokusfrage:</div>
             <div className="header-title-sub">
               Wann ist der Anteil der Kinder im Vergleich zu den erwachsenen
-              Fussgängern am grössten an der Bahnhofstrasse Mitte?
+              Fussgängern am grössten an der {selectedOrt} im Jahr {selectedJahr}?
             </div>
           </div>
 
