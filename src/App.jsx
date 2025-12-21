@@ -12,8 +12,7 @@ export function App() {
   const [orte, setOrte] = useState([]);
   const [selectedOrt, setSelectedOrt] = useState("Bahnhofstrasse (Mitte)");
   const [daten, setDaten] = useState([]);
-  const backgroundColor =
-    eingabe === "Grau" ? "#b4b4b4" : eingabe === "FH" ? "#f4d03f" : "";
+  const backgroundColor = eingabe === "Dunkel" ? "#b4b4b4" : "";
   const jahre = ["2021", "2022", "2023", "2024", "2025"];
   const [selectedJahr, setSelectedJahr] = useState("2025");
 

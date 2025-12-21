@@ -44,8 +44,7 @@ export const Header = ({
           Design wählen:
           <select value={eingabe} onChange={(e) => seteingabe(e.target.value)}>
             <option value="Standard">Standard</option>
-            <option value="Grau">Grau</option>
-            <option value="FH">FH</option>
+            <option value="Dunkel">Dunkel</option>
           </select>
         </div>
       </div>

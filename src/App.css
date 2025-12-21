@@ -20,6 +20,7 @@ body {
 header {
   grid-column: 1 / -1;
   background: lightblue;
+  border: 1px solid black;
 }
 
 footer {
@@ -28,6 +29,7 @@ footer {
   background: lightblue;
   align-items: center;
   justify-content: center;
+  border: 1px solid black;
 }
 
 aside {
@@ -35,6 +37,7 @@ aside {
   flex-direction: column;
   background: lightgray;
   justify-content: space-between;
+  border-right: 1px solid black;
 }
 
 main {
