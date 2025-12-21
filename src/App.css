@@ -12,7 +12,7 @@ body {
 
 .app {
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 450px 1fr;
   grid-template-rows: auto 1fr auto;
   height: 100vh;
 }
@@ -28,7 +28,10 @@ footer {
 }
 
 aside {
+  display: flex;
+  flex-direction: column;
   background: lightgray;
+  justify-content: space-between;
 }
 
 main {

@@ -1,4 +1,14 @@
-export const Sidebar = ({ backgroundColor, daten, selectedJahr, selectedOrt = [] }) => {
+import { MapContainer, TileLayer, GeoJSON, Tooltip } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+
+import locations from "./data/hystreet_locations.json";
+
+export const Sidebar = ({
+  backgroundColor,
+  daten,
+  selectedJahr,
+  selectedOrt = [],
+}) => {
   const monthNames = [
     "Januar",
     "Februar",
@@ -29,8 +39,8 @@ export const Sidebar = ({ backgroundColor, daten, selectedJahr, selectedOrt = []
 
   // Aggregation pro Monat
   const aggMap = {};
-  gefilterteDaten.forEach(d => {
-    const month = parseInt(d.timestamp.substring(5,7));
+  gefilterteDaten.forEach((d) => {
+    const month = parseInt(d.timestamp.substring(5, 7));
     aggMap[month] = aggMap[month] || { child: 0, adult: 0 };
     aggMap[month].child += Number(d.child);
     aggMap[month].adult += Number(d.adult);
@@ -48,10 +58,9 @@ export const Sidebar = ({ backgroundColor, daten, selectedJahr, selectedOrt = []
     aggArray[0]
   );
   // Durchschnittlicher Kinderanteil im Jahr
-  const durchschnittlicherKinderanteil = aggArray.reduce(
-    (summe, aktuell) => summe + aktuell.share,
-    0
-  ) / aggArray.length;
+  const durchschnittlicherKinderanteil =
+    aggArray.reduce((summe, aktuell) => summe + aktuell.share, 0) /
+    aggArray.length;
 
   // Monat mit den meisten Kindern
   const monatMitDenMeistenKindern = aggArray.reduce(
@@ -66,37 +75,74 @@ export const Sidebar = ({ backgroundColor, daten, selectedJahr, selectedOrt = []
   );
 
   // Gesamtanzahl Kinder im Jahr
-  const gesamtKinder = aggArray.reduce((summe, aktuell) => summe + aktuell.child, 0);
+  const gesamtKinder = aggArray.reduce(
+    (summe, aktuell) => summe + aktuell.child,
+    0
+  );
 
   // Gesamtanzahl Erwachsene im Jahr
-  const gesamtErwachsene = aggArray.reduce((summe, aktuell) => summe + aktuell.adult, 0);
-  
-
+  const gesamtErwachsene = aggArray.reduce(
+    (summe, aktuell) => summe + aktuell.adult,
+    0
+  );
 
   return (
-  <aside style={{ backgroundColor, padding: "10px", minWidth: "250px" }}>
-    <h4>{selectedOrt} - {selectedJahr}</h4>
-    <ul>
-      <li>
-        Höchster Kinderanteil: {monthNames[monatMitHoechstemKinderanteil.month - 1]} (
-        {(monatMitHoechstemKinderanteil.share * 100).toFixed(2)}%)
-      </li>
-      <li>
-        Durchschnittlicher Kinderanteil: {(durchschnittlicherKinderanteil * 100).toFixed(2)}%
-      </li>
-      <li>
-        Monat mit den meisten Kindern: {monthNames[monatMitDenMeistenKindern.month - 1]} (
-        {monatMitDenMeistenKindern.child})
-      </li>
-      <li>
-        Monat mit den meisten Erwachsenen: {monthNames[monatMitDenMeistenErwachsenen.month - 1]} (
-        {monatMitDenMeistenErwachsenen.adult})
-      </li>
-      <li>Gesamtanzahl Kinder im Jahr: {gesamtKinder}</li>
-      <li>Gesamtanzahl Erwachsene im Jahr: {gesamtErwachsene}</li>
-    </ul>
-  </aside>
-);
+    <aside style={{ backgroundColor, padding: "10px", minWidth: "250px" }}>
+      <h4>
+        {selectedOrt} - {selectedJahr}
+      </h4>
+      <ul>
+        <li>
+          Höchster Kinderanteil:{" "}
+          {monthNames[monatMitHoechstemKinderanteil.month - 1]} (
+          {(monatMitHoechstemKinderanteil.share * 100).toFixed(2)}%)
+        </li>
+        <li>
+          Durchschnittlicher Kinderanteil:{" "}
+          {(durchschnittlicherKinderanteil * 100).toFixed(2)}%
+        </li>
+        <li>
+          Monat mit den meisten Kindern:{" "}
+          {monthNames[monatMitDenMeistenKindern.month - 1]} (
+          {monatMitDenMeistenKindern.child})
+        </li>
+        <li>
+          Monat mit den meisten Erwachsenen:{" "}
+          {monthNames[monatMitDenMeistenErwachsenen.month - 1]} (
+          {monatMitDenMeistenErwachsenen.adult})
+        </li>
+        <li>Gesamtanzahl Kinder im Jahr: {gesamtKinder}</li>
+        <li>Gesamtanzahl Erwachsene im Jahr: {gesamtErwachsene}</li>
+      </ul>
+      <div style={{ height: "400px", width: "100%" }}>
+        <MapContainer
+          center={[47.372, 8.54]}
+          zoom={15}
+          style={{ height: "100%", width: "100%" }}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&copy; OpenStreetMap contributors"
+          />
+
+          <GeoJSON
+            data={locations}
+            style={{
+              color: "red",
+              weight: 2,
+              fillOpacity: 0.4,
+            }}
+            onEachFeature={(feature, layer) => {
+              layer.bindTooltip(feature.properties.name, {
+                sticky: true,
+                direction: "top",
+              });
+            }}
+          />
+        </MapContainer>
+      </div>
+    </aside>
+  );
 };
 
 export default Sidebar;
