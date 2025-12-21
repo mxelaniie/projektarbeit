@@ -1,7 +1,7 @@
 import React from "react";
 import { VegaEmbed } from "react-vega";
 
-export const MainArea = ({ selectedOrt, daten, backgroundColor, selectedJahr, }) => {
+export const MainArea = ({ selectedOrt, daten, backgroundColor, selectedJahr }) => {
   const monthNames = [
     "Januar",
     "Februar",
@@ -24,8 +24,6 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor, selectedJahr, })
     (d) => Jahr(d) === Number(selectedJahr)
   );
 
-  console.log("Gefilterte Daten:", gefilterteDaten);
-  console.log("selectedJahr:", selectedJahr);
   // Daten aggregieren
   const aggMap = {};
   gefilterteDaten.forEach((d) => {
@@ -79,7 +77,7 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor, selectedJahr, })
         textAlign: "center",
       }}
     >
-      <h3>Kinderanteil an Fussgängern in {selectedOrt}</h3>
+      <h3>Kinderanteil an Fussgängern in {selectedOrt} {selectedJahr}</h3>
       <VegaEmbed spec={Spec} options={{ mode: "vega-lite" }} />
     </main>
   );
