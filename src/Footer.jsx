@@ -1,4 +1,4 @@
-export const Footer = ({ backgroundColor }) => {
+export const Footer = ({ backgroundColor, wappen }) => {
   return (
     <footer
       style={{
@@ -7,9 +7,11 @@ export const Footer = ({ backgroundColor }) => {
         padding: "20px",
       }}
     >
-      <div>Modul: 3050 WebDev & interaktive DataVis</div>
-      <div>Autoren: Alina Portmann, Melanie Schiefermüller</div>
-      <div>@2025</div>
+      <span>
+        Modul: 3050 WebDev & interaktive DataVis <br />
+        Autoren: Alina Portmann, Melanie Schiefermüller <br />
+        @2025
+      </span>
     </footer>
   );
 };

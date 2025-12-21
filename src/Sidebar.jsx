@@ -115,7 +115,7 @@ export const Sidebar = ({
         <li>Gesamtanzahl Kinder im Jahr: {gesamtKinder}</li>
         <li>Gesamtanzahl Erwachsene im Jahr: {gesamtErwachsene}</li>
       </ul>
-      <div style={{ height: "400px", width: "100%" }}>
+      <div style={{ height: "420px", width: "100%" }}>
         <MapContainer
           center={[47.372, 8.54]}
           zoom={15}

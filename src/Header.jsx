@@ -1,8 +1,6 @@
 export const Header = ({
   eingabe,
   seteingabe,
-  wappen,
-  zuerich,
   orte,
   selectedOrt,
   setSelectedOrt,
@@ -10,26 +8,21 @@ export const Header = ({
   jahre,
   selectedJahr,
   setSelectedJahr,
-
+  wappen,
 }) => {
   return (
-    <header>
-      <div className="header-container" style={{ backgroundColor }}>
-        <div className="header-top">
-          <img src={wappen} width={60} height={70} />
+    <header className="header" style={{ backgroundColor }}>
+      <div className="header-wappen header-wappen-left">
+        <img src={wappen} height={80} width={60} />
+      </div>
 
-          <div className="header-title">
-            <div className="header-title-main">Fokusfrage:</div>
-            <div className="header-title-sub">
-              Wann ist der Anteil der Kinder im Vergleich zu den erwachsenen
-              Fussgängern am grössten an der {selectedOrt} im Jahr {selectedJahr}?
-            </div>
-          </div>
-
-          <img src={zuerich} width={300} height={70} />
+      <div className="header-center">
+        <div className="header-title">
+          Wann ist der Anteil der Kinder im Vergleich zu den erwachsenen
+          Fussgängern am grössten an der {selectedOrt} im Jahr {selectedJahr}?
         </div>
 
-        <div className="header-controls" style={{ backgroundColor }}>
+        <div className="header-controls">
           Bitte Ort wählen:
           <select
             value={selectedOrt}
@@ -43,7 +36,6 @@ export const Header = ({
           <select
             value={selectedJahr}
             onChange={(e) => setSelectedJahr(e.target.value)}
-            style={{ padding: "5px" }}
           >
             {jahre.map((jahr) => (
               <option key={jahr}>{jahr}</option>
@@ -56,6 +48,10 @@ export const Header = ({
             <option value="FH">FH</option>
           </select>
         </div>
+      </div>
+
+      <div className="header-wappen header-wappen-right">
+        <img src={wappen} height={80} width={60} />
       </div>
     </header>
   );
