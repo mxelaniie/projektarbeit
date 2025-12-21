@@ -8,6 +8,7 @@ export const Sidebar = ({
   daten,
   selectedJahr,
   selectedOrt = [],
+  setSelectedOrt,
 }) => {
   const monthNames = [
     "Januar",
@@ -121,21 +122,25 @@ export const Sidebar = ({
           style={{ height: "100%", width: "100%" }}
         >
           <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution="&copy; OpenStreetMap contributors"
+            url="https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>'
           />
 
           <GeoJSON
             data={locations}
             style={{
-              color: "red",
-              weight: 2,
-              fillOpacity: 0.4,
+              color: "blue",
             }}
             onEachFeature={(feature, layer) => {
+              // Tooltip beim Hover
               layer.bindTooltip(feature.properties.name, {
                 sticky: true,
                 direction: "top",
+              });
+
+              // Klick auf Polygon → selectedOrt setzen //in React onClick in Leaflet layer.on("event")
+              layer.on("click", () => {
+                setSelectedOrt(feature.properties.name);
               });
             }}
           />

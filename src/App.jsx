@@ -46,8 +46,8 @@ export function App() {
         selectedOrt={selectedOrt}
         setSelectedOrt={setSelectedOrt}
         backgroundColor={backgroundColor}
-        jahre={jahre}                   
-        selectedJahr={selectedJahr}     
+        jahre={jahre}
+        selectedJahr={selectedJahr}
         setSelectedJahr={setSelectedJahr}
       />
       <Sidebar
@@ -56,6 +56,7 @@ export function App() {
         daten={daten}
         selectedJahr={selectedJahr}
         selectedOrt={selectedOrt}
+        setSelectedOrt={setSelectedOrt}
       />
       <MainArea
         selectedOrt={selectedOrt}
