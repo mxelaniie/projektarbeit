@@ -44,7 +44,7 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor, selectedJahr }) 
     .sort((a, b) => a.month_num - b.month_num)
     .map((d) => {
       const total = d.child + d.adult;
-      return { month_name: d.month_name, share: total > 0 ? d.child / total : 0 };
+      return { month_name: d.month_name, share: total > 0 ? d.child / total : 0, child: d.child, adult: d.adult };
   });
 
   const Spec = {
@@ -64,6 +64,12 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor, selectedJahr }) 
         axis: { format: ".1%" }, //.1 bedeutet eine Nachkommastelle in Prozent
       },
       color: { value: "steelblue" },
+      tooltip: [
+      { field: "month_name", type: "ordinal", title: "Monat" },
+      { field: "child", type: "quantitative", title: "Anzhal Kinder" },
+      { field: "adult", type: "quantitative", title: "Anzahl Erwachsene" },
+      { field: "share", type: "quantitative", title: "Kinderanteil", format: ".2%" }
+    ]
     },
     width: 900,
     height: 400,
