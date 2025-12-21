@@ -107,6 +107,31 @@ main {
   border-color: #0077ff;
   box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.3);
 }
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  gap: 5px; /* Abstand zwischen Text und Kästchen */
+  font-size: 16px;
+}
+
+.checkbox-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #0077ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  flex-shrink: 0;
+}
+
+.checkbox-box.checked {
+  background-color: #0077ff;
+  color: white;
+  font-size: 16px;
+}
 
 .main-area {
   padding: 20px;

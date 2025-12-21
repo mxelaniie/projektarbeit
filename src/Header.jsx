@@ -9,6 +9,8 @@ export const Header = ({
   selectedJahr,
   setSelectedJahr,
   wappen,
+  setTempCheck,
+  tempCheck,
 }) => {
   return (
     <header className="header" style={{ backgroundColor }}>
@@ -41,6 +43,12 @@ export const Header = ({
               <option key={jahr}>{jahr}</option>
             ))}
           </select>
+          <div className="checkbox" onClick={() => setTempCheck(!tempCheck)}>
+            Durchschnittstemperatur anzeigen
+            <div className={`checkbox-box ${tempCheck ? "checked" : ""}`}>
+              {tempCheck ? "✔" : ""}
+            </div>
+          </div>
           Design wählen:
           <select value={eingabe} onChange={(e) => seteingabe(e.target.value)}>
             <option value="Standard">Standard</option>

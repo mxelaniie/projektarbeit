@@ -15,6 +15,8 @@ export function App() {
   const backgroundColor = eingabe === "Dunkel" ? "#b4b4b4" : "";
   const jahre = ["2021", "2022", "2023", "2024", "2025"];
   const [selectedJahr, setSelectedJahr] = useState("2025");
+  const [tempCheck, setTempCheck] = useState(false);
+  const [temp, setTemp] = useState(null);
 
   // Orte laden
   useEffect(() => {
@@ -32,6 +34,18 @@ export function App() {
       .then((data) => setDaten(data));
   }, [selectedOrt]);
 
+  useEffect(() => {
+    if (selectedOrt) {
+      fetch(
+        `http://localhost:8000/analyse/temperaturen?analyseort=${encodeURIComponent(
+          selectedOrt
+        )}`
+      )
+        .then((res) => res.json())
+        .then((data) => setTemp(data));
+    }
+  }, [selectedOrt]);
+
   return (
     <div className="app">
       <Header
@@ -45,6 +59,8 @@ export function App() {
         selectedJahr={selectedJahr}
         setSelectedJahr={setSelectedJahr}
         wappen={wappen}
+        tempCheck={tempCheck}
+        setTempCheck={setTempCheck}
       />
       <Sidebar
         eingabe={eingabe}
@@ -59,6 +75,8 @@ export function App() {
         daten={daten}
         backgroundColor={backgroundColor}
         selectedJahr={selectedJahr}
+        tempCheck={tempCheck}
+        temp={temp}
       />
       <Footer backgroundColor={backgroundColor} />
     </div>
