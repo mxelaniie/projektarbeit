@@ -3,18 +3,18 @@ import { VegaEmbed } from "react-vega";
 
 export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
   const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "Januar",
+    "Febebruar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Deezember",
   ];
 
   const Monat = (d) => parseInt(d.timestamp.substring(5, 7));
