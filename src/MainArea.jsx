@@ -1,10 +1,10 @@
 import React from "react";
 import { VegaEmbed } from "react-vega";
 
-export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
+export const MainArea = ({ selectedOrt, daten, backgroundColor, selectedJahr, }) => {
   const monthNames = [
     "Januar",
-    "Febebruar",
+    "Februar",
     "März",
     "April",
     "Mai",
@@ -14,14 +14,21 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
     "September",
     "Oktober",
     "November",
-    "Deezember",
+    "Dezember",
   ];
 
+  const Jahr = (d) => parseInt(d.timestamp.substring(0, 4));
   const Monat = (d) => parseInt(d.timestamp.substring(5, 7));
 
+  const gefilterteDaten = daten.filter(
+    (d) => Jahr(d) === Number(selectedJahr)
+  );
+
+  console.log("Gefilterte Daten:", gefilterteDaten);
+  console.log("selectedJahr:", selectedJahr);
   // Daten aggregieren
   const aggMap = {};
-  daten.forEach((d) => {
+  gefilterteDaten.forEach((d) => {
     const key = Monat(d);
     aggMap[key] = aggMap[key] || {
       month_num: key,
@@ -32,12 +39,14 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
     aggMap[key].child += d.child;
     aggMap[key].adult += d.adult;
   });
-  const agg = Object.values(aggMap).sort((a, b) => a.month_num - b.month_num);
+  
 
   // Kinderanteil berechnen
-  const dataWithShare = agg.map((d) => {
-    const total = d.child + d.adult;
-    return { month_name: d.month_name, share: total > 0 ? d.child / total : 0 };
+  const dataWithShare = Object.values(aggMap)
+    .sort((a, b) => a.month_num - b.month_num)
+    .map((d) => {
+      const total = d.child + d.adult;
+      return { month_name: d.month_name, share: total > 0 ? d.child / total : 0 };
   });
 
   const Spec = {
@@ -75,5 +84,7 @@ export const MainArea = ({ selectedOrt, daten, backgroundColor }) => {
     </main>
   );
 };
+
+
 
 export default MainArea;

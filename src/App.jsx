@@ -59,6 +59,7 @@ export function App() {
         selectedOrt={selectedOrt}
         daten={daten}
         backgroundColor={backgroundColor}
+        selectedJahr={selectedJahr}
       />
       <Footer backgroundColor={backgroundColor} />
     </div>
