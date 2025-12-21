@@ -1,17 +1,17 @@
-export const Sidebar = ({ backgroundColor, daten = [] }) => {
+export const Sidebar = ({ backgroundColor, daten, selectedJahr, selectedOrt = [] }) => {
   const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
   ];
 
   if (daten.length === 0) {
@@ -22,47 +22,81 @@ export const Sidebar = ({ backgroundColor, daten = [] }) => {
     );
   }
 
-  // Aggregation pro Monat
-  const Monat = (d) => parseInt(d.timestamp.substring(5, 7));
-  const aggMap = {};
-  daten.forEach((d) => {
-    const key = Monat(d);
-    aggMap[key] = aggMap[key] || {
-      month_num: key,
-      month_name: monthNames[key - 1],
-      child: 0,
-      adult: 0,
-    };
-    aggMap[key].child += d.child;
-    aggMap[key].adult += d.adult;
-  });
-  const agg = Object.values(aggMap).sort((a, b) => a.month_num - b.month_num);
+  // Filter nach Jahr
+  const gefilterteDaten = daten.filter(
+    (d) => parseInt(d.timestamp.substring(0, 4)) === Number(selectedJahr)
+  );
 
-  // Monat mit höchstem Kinderanteil
-  const maxKinderMonat = agg.reduce((max, curr) => {
-    const maxShare = max.child / (max.child + max.adult);
-    const currShare = curr.child / (curr.child + curr.adult);
-    return currShare > maxShare ? curr : max;
+  // Aggregation pro Monat
+  const aggMap = {};
+  gefilterteDaten.forEach(d => {
+    const month = parseInt(d.timestamp.substring(5,7));
+    aggMap[month] = aggMap[month] || { child: 0, adult: 0 };
+    aggMap[month].child += Number(d.child);
+    aggMap[month].adult += Number(d.adult);
   });
+
+  const aggArray = Object.entries(aggMap).map(([monthNum, value]) => {
+    const total = value.child + value.adult;
+    const share = total > 0 ? value.child / total : 0;
+    return { month: Number(monthNum), ...value, total, share };
+  });
+
+  // Höchster Kinderanteil im Jahr
+  const monatMitHoechstemKinderanteil = aggArray.reduce(
+    (bisher, aktuell) => (aktuell.share > bisher.share ? aktuell : bisher),
+    aggArray[0]
+  );
+  // Durchschnittlicher Kinderanteil im Jahr
+  const durchschnittlicherKinderanteil = aggArray.reduce(
+    (summe, aktuell) => summe + aktuell.share,
+    0
+  ) / aggArray.length;
+
+  // Monat mit den meisten Kindern
+  const monatMitDenMeistenKindern = aggArray.reduce(
+    (bisher, aktuell) => (aktuell.child > bisher.child ? aktuell : bisher),
+    aggArray[0]
+  );
+
+  // Monat mit den meisten Erwachsenen
+  const monatMitDenMeistenErwachsenen = aggArray.reduce(
+    (bisher, aktuell) => (aktuell.adult > bisher.adult ? aktuell : bisher),
+    aggArray[0]
+  );
+
+  // Gesamtanzahl Kinder im Jahr
+  const gesamtKinder = aggArray.reduce((summe, aktuell) => summe + aktuell.child, 0);
+
+  // Gesamtanzahl Erwachsene im Jahr
+  const gesamtErwachsene = aggArray.reduce((summe, aktuell) => summe + aktuell.adult, 0);
+  
+
 
   return (
-    <aside
-      style={{
-        backgroundColor: backgroundColor,
-        padding: "10px",
-      }}
-    >
-      <h5>Zahlen pro Monat:</h5>
-      <ul>
-        {agg.map((d) => (
-          <li key={d.month_name}>
-            {d.month_name}: Kinder {d.child}, Erwachsene {d.adult}
-          </li>
-        ))}
-      </ul>
-      <div>Monat mit höchstem Kinderanteil: {maxKinderMonat.month_name}</div>
-    </aside>
-  );
+  <aside style={{ backgroundColor, padding: "10px", minWidth: "250px" }}>
+    <h4>{selectedOrt} - {selectedJahr}</h4>
+    <ul>
+      <li>
+        Höchster Kinderanteil: {monthNames[monatMitHoechstemKinderanteil.month - 1]} (
+        {(monatMitHoechstemKinderanteil.share * 100).toFixed(2)}%)
+      </li>
+      <li>
+        Durchschnittlicher Kinderanteil: {(durchschnittlicherKinderanteil * 100).toFixed(2)}%
+      </li>
+      <li>
+        Monat mit den meisten Kindern: {monthNames[monatMitDenMeistenKindern.month - 1]} (
+        {monatMitDenMeistenKindern.child})
+      </li>
+      <li>
+        Monat mit den meisten Erwachsenen: {monthNames[monatMitDenMeistenErwachsenen.month - 1]} (
+        {monatMitDenMeistenErwachsenen.adult})
+      </li>
+      <li>Gesamtanzahl Kinder im Jahr: {gesamtKinder}</li>
+      <li>Gesamtanzahl Erwachsene im Jahr: {gesamtErwachsene}</li>
+    </ul>
+  </aside>
+);
 };
 
 export default Sidebar;
