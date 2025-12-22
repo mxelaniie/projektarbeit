@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 import locations from "./data/hystreet_locations.json";
 
 export const Sidebar = ({
-  backgroundColor,
   daten,
   selectedJahr,
   selectedOrt,
@@ -27,7 +26,7 @@ export const Sidebar = ({
 
   if (!daten || daten.length === 0) {
     return (
-      <aside style={{ backgroundColor, padding: "10px" }}>
+      <aside style={{ backgroundColor: "#b4b4b4", padding: "10px" }}>
         <div>Keine Daten vorhanden</div>
       </aside>
     );
@@ -69,7 +68,13 @@ export const Sidebar = ({
   const durchschnittlicherKinderanteil = summeShare / daten.length;
 
   return (
-    <aside style={{ backgroundColor, padding: "10px", minWidth: "250px" }}>
+    <aside
+      style={{
+        backgroundColor: "#c3c3c3ff",
+        padding: "10px",
+        minWidth: "250px",
+      }}
+    >
       <h4>
         {selectedOrt} - {selectedJahr}
       </h4>

@@ -21,7 +21,7 @@ export const MainArea = ({
   daten,
   selectedJahr,
   tempCheck,
-  backgroundColor,
+  hintergrundEingabe,
 }) => {
   const Spec = {
     data: { values: daten },
@@ -74,7 +74,14 @@ export const MainArea = ({
   };
 
   return (
-    <main style={{ backgroundColor, padding: "20px", textAlign: "center" }}>
+    <main
+      style={{
+        backgroundColor:
+          hintergrundEingabe === "Dunkel" ? "#c3c3c3ff" : "white",
+        padding: "20px",
+        textAlign: "center",
+      }}
+    >
       <h3>
         Kinderanteil an Fußgängern in {selectedOrt} {selectedJahr}
       </h3>

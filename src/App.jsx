@@ -56,7 +56,6 @@ export function App() {
         setTempCheck={setTempCheck}
       />
       <Sidebar
-        backgroundColor={backgroundColor}
         daten={monatDaten}
         selectedJahr={selectedJahr}
         selectedOrt={selectedOrt}
@@ -65,11 +64,11 @@ export function App() {
       <MainArea
         selectedOrt={selectedOrt}
         daten={monatDaten}
-        backgroundColor={backgroundColor}
+        hintergrundEingabe={hintergrundEingabe}
         selectedJahr={selectedJahr}
         tempCheck={tempCheck}
       />
-      <Footer backgroundColor={backgroundColor} />
+      <Footer />
     </div>
   );
 }

@@ -4,7 +4,6 @@ export const Header = ({
   orte,
   selectedOrt,
   setSelectedOrt,
-  backgroundColor,
   jahre,
   selectedJahr,
   setSelectedJahr,
@@ -13,7 +12,7 @@ export const Header = ({
   tempCheck,
 }) => {
   return (
-    <header className="header" style={{ backgroundColor }}>
+    <header className="header">
       <div className="header-wappen header-wappen-left">
         <img src={wappen} height={80} width={60} />
       </div>
