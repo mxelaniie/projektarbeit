@@ -44,7 +44,7 @@ export const Header = ({
           </select>
           <div className="checkbox" onClick={() => setTempCheck(!tempCheck)}>
             Durchschnittstemperatur anzeigen:
-            <div className={`checkbox-box ${tempCheck ? "checked" : ""}`}>
+            <div className={`checkbox-box ${tempCheck ? ".checked" : ""}`}>
               {tempCheck ? "X" : ""}
             </div>
           </div>

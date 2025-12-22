@@ -51,7 +51,6 @@ main {
 
 .header {
   display: flex;
-  align-items: stretch; /* volle Höhe für Wappen */
   justify-content: center;
   padding: 10px;
   background-color: lightblue;
@@ -90,10 +89,9 @@ main {
 }
 
 .checkbox {
-  display: inline-flex;
+  display: inline-flex; /* damit Text und Kästchen nebeneinander sind */
   align-items: center;
   cursor: pointer;
-  user-select: none;
   gap: 5px; /* Abstand zwischen Text und Kästchen */
   font-size: 16px;
 }
@@ -101,12 +99,15 @@ main {
 .checkbox-box {
   width: 20px;
   height: 20px;
-  border: 2px solid #0077ff;
+  border: 1px solid black;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: white;
-  flex-shrink: 0;
+}
+
+.checkbox-box.checked {
+  color: black;
 }
 
 .main-area {
