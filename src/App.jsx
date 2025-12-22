@@ -15,6 +15,20 @@ export function App() {
   const jahre = ["2021", "2022", "2023", "2024", "2025"];
   const wappen =
     "https://upload.wikimedia.org/wikipedia/commons/a/af/Z%C3%BCrich.png";
+  const monthNames = [
+    "Januar",
+    "Februar",
+    "März",
+    "April",
+    "Mai",
+    "Juni",
+    "Juli",
+    "August",
+    "September",
+    "Oktober",
+    "November",
+    "Dezember",
+  ];
 
   // Orte laden
   useEffect(() => {
@@ -24,7 +38,7 @@ export function App() {
       .catch((err) => console.error("Fehler beim Laden der Orte:", err));
   }, []);
 
-  // Monatsdaten laden (Kinderanteil + optional Temperatur)
+  // Monatsdaten laden
   useEffect(() => {
     fetch(
       `http://localhost:8000/analyse/kinderanteil_monat?analyseort=${selectedOrt}&jahr=${selectedJahr}&tempCheck=${tempCheck}`
@@ -37,7 +51,7 @@ export function App() {
   return (
     <div className="app">
       <Header
-        hintergrundEingabee={hintergrundEingabe}
+        hintergrundEingabe={hintergrundEingabe}
         setHintergrundEingabe={setHintergrundEingabe}
         orte={orte}
         selectedOrt={selectedOrt}
@@ -54,6 +68,7 @@ export function App() {
         selectedJahr={selectedJahr}
         selectedOrt={selectedOrt}
         setSelectedOrt={setSelectedOrt}
+        monthNames={monthNames}
       />
       <MainArea
         selectedOrt={selectedOrt}
@@ -61,6 +76,7 @@ export function App() {
         hintergrundEingabe={hintergrundEingabe}
         selectedJahr={selectedJahr}
         tempCheck={tempCheck}
+        monthNames={monthNames}
       />
       <Footer />
     </div>

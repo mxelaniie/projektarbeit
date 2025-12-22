@@ -1,27 +1,13 @@
 import React from "react";
 import { VegaEmbed } from "react-vega";
 
-const monthNames = [
-  "Januar",
-  "Februar",
-  "März",
-  "April",
-  "Mai",
-  "Juni",
-  "Juli",
-  "August",
-  "September",
-  "Oktober",
-  "November",
-  "Dezember",
-];
-
 export const MainArea = ({
   selectedOrt,
   daten,
   selectedJahr,
   tempCheck,
   hintergrundEingabe,
+  monthNames,
 }) => {
   const Spec = {
     data: { values: daten },

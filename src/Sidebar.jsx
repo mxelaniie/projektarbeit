@@ -1,29 +1,14 @@
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-
-import locations from "./data/hystreet_locations.json";
+import locations from "./data/hystreet_locations.json"; //von Datenblatt
 
 export const Sidebar = ({
   daten,
   selectedJahr,
   selectedOrt,
   setSelectedOrt,
+  monthNames,
 }) => {
-  const monthNames = [
-    "Januar",
-    "Februar",
-    "März",
-    "April",
-    "Mai",
-    "Juni",
-    "Juli",
-    "August",
-    "September",
-    "Oktober",
-    "November",
-    "Dezember",
-  ];
-
   if (!daten || daten.length === 0) {
     return (
       <aside style={{ backgroundColor: "#b4b4b4", padding: "10px" }}>
