@@ -7,7 +7,6 @@ export const MainArea = ({
   selectedJahr,
   tempCheck,
   hintergrundEingabe,
-  monthNames,
 }) => {
   const Spec = {
     data: { values: daten },
@@ -19,7 +18,7 @@ export const MainArea = ({
           x: {
             field: "month_name",
             type: "ordinal",
-            sort: monthNames,
+            sort: "month_name",
             title: "Monat",
           },
           y: {
@@ -48,7 +47,7 @@ export const MainArea = ({
         ? {
             mark: { type: "text", dy: -10, color: "blue", fontWeight: "bold" },
             encoding: {
-              x: { field: "month_name", type: "ordinal", sort: monthNames },
+              x: { field: "month_name", type: "ordinal", sort: "month_name" },
               y: { field: "anteil", type: "quantitative" },
               text: { field: "temperature", type: "nominal" },
             },
