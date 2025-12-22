@@ -13,8 +13,8 @@ export const Header = ({
 }) => {
   return (
     <header className="header">
-      <div className="header-wappen header-wappen-left">
-        <img src={wappen} height={80} width={60} />
+      <div>
+        <img src={wappen} height={80} width={70} />
       </div>
 
       <div className="header-center">
@@ -43,9 +43,9 @@ export const Header = ({
             ))}
           </select>
           <div className="checkbox" onClick={() => setTempCheck(!tempCheck)}>
-            Durchschnittstemperatur anzeigen
+            Durchschnittstemperatur anzeigen:
             <div className={`checkbox-box ${tempCheck ? "checked" : ""}`}>
-              {tempCheck ? "✔" : ""}
+              {tempCheck ? "X" : ""}
             </div>
           </div>
           Design wählen:
@@ -59,8 +59,8 @@ export const Header = ({
         </div>
       </div>
 
-      <div className="header-wappen header-wappen-right">
-        <img src={wappen} height={80} width={60} />
+      <div>
+        <img src={wappen} height={80} width={70} />
       </div>
     </header>
   );

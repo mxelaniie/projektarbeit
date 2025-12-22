@@ -21,6 +21,7 @@ header {
   grid-column: 1 / -1;
   background: lightblue;
   border: 1px solid black;
+  padding: 10px;
 }
 
 footer {
@@ -31,7 +32,7 @@ footer {
   justify-content: center;
   border: 1px solid black;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
 }
 
 aside {
@@ -51,21 +52,9 @@ main {
 .header {
   display: flex;
   align-items: stretch; /* volle Höhe für Wappen */
-  justify-content: center; /* Text zentrieren */
-  padding: 10px 0;
-  background-color: lightblue;
-}
-
-.header-wappen {
-  flex: 0 0 80px; /* feste Breite für Wappen */
-  display: flex;
-  align-items: center;
   justify-content: center;
-}
-
-.header-wappen img {
-  height: 100%; /* volle Header-Höhe */
-  object-fit: contain;
+  padding: 10px;
+  background-color: lightblue;
 }
 
 .header-center {
@@ -100,16 +89,6 @@ main {
   background-color: #f0f0f0;
 }
 
-.header-controls select:hover {
-  border-color: #555;
-  background-color: #e0e0e0;
-}
-
-.header-controls select:focus {
-  outline: none;
-  border-color: #0077ff;
-  box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.3);
-}
 .checkbox {
   display: inline-flex;
   align-items: center;
@@ -130,12 +109,6 @@ main {
   flex-shrink: 0;
 }
 
-.checkbox-box.checked {
-  background-color: #0077ff;
-  color: white;
-  font-size: 16px;
-}
-
 .main-area {
   padding: 20px;
   overflow-y: auto;
@@ -151,12 +124,4 @@ main {
   display: flex;
   flex-direction: column;
   gap: 15px;
-}
-
-#text {
-  cursor: pointer;
-}
-
-#dropdown {
-  cursor: pointer;
 }
