@@ -1,17 +1,16 @@
 import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import locations from "./data/hystreet_locations.json"; //von Datenblatt
+import locations from "./data/hystreet_locations.json"; // von Datenblatt
 
 export const Sidebar = ({
   daten,
   selectedJahr,
   selectedOrt,
   setSelectedOrt,
-  monthNames,
 }) => {
-  if (!daten || daten.length === 0) {
+  if (daten.length === 0) {
     return (
-      <aside style={{ backgroundColor: "#b4b4b4", padding: "10px" }}>
+      <aside>
         <div>Keine Daten vorhanden</div>
       </aside>
     );
@@ -20,7 +19,7 @@ export const Sidebar = ({
   let monatMitHoechstemKinderanteil = daten[0];
   let monatMitDenMeistenKindern = daten[0];
   let monatMitDenMeistenErwachsenen = daten[0];
-  let summeAnteil;
+  let summeAnteil = 0;
   let gesamtKinder = 0;
   let gesamtErwachsene = 0;
 
@@ -49,38 +48,31 @@ export const Sidebar = ({
     gesamtErwachsene += monat.adult;
   });
 
-  const durchschnittlicherKinderanteil = summeAnteil / daten.length;
+  const durchschnittlicherKinderanteil =
+    daten.length > 0 ? summeAnteil / daten.length : 0;
 
   return (
-    <aside
-      style={{
-        backgroundColor: "#c3c3c3ff",
-        padding: "10px",
-        minWidth: "250px",
-      }}
-    >
+    <aside>
       <h4>
         {selectedOrt} - {selectedJahr}
       </h4>
       <ul>
         <li>
-          Höchster Kinderanteil:{" "}
-          {monthNames[monatMitHoechstemKinderanteil.month - 1]} (
-          {(monatMitHoechstemKinderanteil.anteil * 100).toFixed(2)}%)
+          Höchster Kinderanteil: {monatMitHoechstemKinderanteil.month_name} -{" "}
+          {(monatMitHoechstemKinderanteil.anteil * 100).toFixed(2)}%
         </li>
         <li>
           Durchschnittlicher Kinderanteil:{" "}
           {(durchschnittlicherKinderanteil * 100).toFixed(2)}%
         </li>
         <li>
-          Monat mit den meisten Kindern:{" "}
-          {monthNames[monatMitDenMeistenKindern.month - 1]} (
-          {monatMitDenMeistenKindern.child})
+          Monat mit den meisten Kindern: {monatMitDenMeistenKindern.month_name}{" "}
+          - {monatMitDenMeistenKindern.child}
         </li>
         <li>
           Monat mit den meisten Erwachsenen:{" "}
-          {monthNames[monatMitDenMeistenErwachsenen.month - 1]} (
-          {monatMitDenMeistenErwachsenen.adult})
+          {monatMitDenMeistenErwachsenen.month_name} -{" "}
+          {monatMitDenMeistenErwachsenen.adult}
         </li>
         <li>Gesamtanzahl Kinder im Jahr: {gesamtKinder}</li>
         <li>Gesamtanzahl Erwachsene im Jahr: {gesamtErwachsene}</li>
@@ -100,10 +92,7 @@ export const Sidebar = ({
             data={locations}
             style={{ color: "blue" }}
             onEachFeature={(feature, layer) => {
-              layer.bindTooltip(feature.properties.name, {
-                sticky: true,
-                direction: "top",
-              });
+              layer.bindTooltip(feature.properties.name); //Pointer in Leaflet.css definiert
               layer.on("click", () => setSelectedOrt(feature.properties.name));
             }}
           />

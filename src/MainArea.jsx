@@ -63,7 +63,7 @@ export const MainArea = ({
     <main
       style={{
         backgroundColor:
-          hintergrundEingabe === "Dunkel" ? "#c3c3c3ff" : "white",
+          hintergrundEingabe === "Dunkel" ? "lightgrey" : "white",
         padding: "20px",
         textAlign: "center",
       }}

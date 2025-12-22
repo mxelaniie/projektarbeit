@@ -40,6 +40,7 @@ aside {
   background: lightgray;
   justify-content: space-between;
   border-right: 1px solid black;
+  padding: 10px;
 }
 
 main {
