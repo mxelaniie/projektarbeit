@@ -18,7 +18,7 @@ export function App() {
 
   // Orte laden
   useEffect(() => {
-    fetch("http://localhost:8000/orte")
+    fetch("https://backend-rouge-gamma-83.vercel.app/orte")
       .then((res) => res.json())
       .then((data) => setOrte(data))
       .catch((err) => console.error("Fehler beim Laden der Orte:", err));
@@ -27,7 +27,7 @@ export function App() {
   // Monatsdaten laden
   useEffect(() => {
     fetch(
-      `http://localhost:8000/analyse/kinderanteil_monat?analyseort=${selectedOrt}&jahr=${selectedJahr}&tempCheck=${tempCheck}`
+      `https://backend-rouge-gamma-83.vercel.app/analyse/kinderanteil_monat?analyseort=${selectedOrt}&jahr=${selectedJahr}&tempCheck=${tempCheck}`
     )
       .then((res) => res.json())
       .then((data) => setMonatDaten(data))
