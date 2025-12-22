@@ -1,6 +1,6 @@
 export const Header = ({
-  eingabe,
-  seteingabe,
+  hintergrundEingabe,
+  setHintergrundEingabe,
   orte,
   selectedOrt,
   setSelectedOrt,
@@ -50,7 +50,10 @@ export const Header = ({
             </div>
           </div>
           Design wählen:
-          <select value={eingabe} onChange={(e) => seteingabe(e.target.value)}>
+          <select
+            value={hintergrundEingabe}
+            onChange={(e) => setHintergrundEingabe(e.target.value)}
+          >
             <option value="Standard">Standard</option>
             <option value="Dunkel">Dunkel</option>
           </select>

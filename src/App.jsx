@@ -6,12 +6,12 @@ import { Sidebar } from "./Sidebar.jsx";
 import { MainArea } from "./MainArea.jsx";
 
 export function App() {
-  const [eingabe, seteingabe] = useState("");
+  const [hintergrundEingabe, setHintergrundEingabe] = useState("");
   const wappen =
     "https://upload.wikimedia.org/wikipedia/commons/a/af/Z%C3%BCrich.png";
   const [orte, setOrte] = useState([]);
   const [selectedOrt, setSelectedOrt] = useState("Bahnhofstrasse (Mitte)");
-  const backgroundColor = eingabe === "Dunkel" ? "#b4b4b4" : "";
+  const backgroundColor = hintergrundEingabe === "Dunkel" ? "#b4b4b4" : "";
   const jahre = ["2021", "2022", "2023", "2024", "2025"];
   const [selectedJahr, setSelectedJahr] = useState("2025");
   const [tempCheck, setTempCheck] = useState(false);
@@ -42,8 +42,8 @@ export function App() {
   return (
     <div className="app">
       <Header
-        eingabe={eingabe}
-        seteingabe={seteingabe}
+        hintergrundEingabee={hintergrundEingabe}
+        setHintergrundEingabe={setHintergrundEingabe}
         orte={orte}
         selectedOrt={selectedOrt}
         setSelectedOrt={setSelectedOrt}
@@ -56,7 +56,6 @@ export function App() {
         setTempCheck={setTempCheck}
       />
       <Sidebar
-        eingabe={eingabe}
         backgroundColor={backgroundColor}
         daten={monatDaten}
         selectedJahr={selectedJahr}
