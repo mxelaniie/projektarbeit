@@ -17,18 +17,17 @@ export const Sidebar = ({
     );
   }
 
-  // Initialisierung der Variablen
   let monatMitHoechstemKinderanteil = daten[0];
   let monatMitDenMeistenKindern = daten[0];
   let monatMitDenMeistenErwachsenen = daten[0];
-  let summeShare = 0;
+  let summeAnteil;
   let gesamtKinder = 0;
   let gesamtErwachsene = 0;
 
   // Schleife über alle Monate
   daten.forEach((monat) => {
     // Höchster Kinderanteil
-    if (monat.share > monatMitHoechstemKinderanteil.share) {
+    if (monat.anteil > monatMitHoechstemKinderanteil.anteil) {
       monatMitHoechstemKinderanteil = monat;
     }
 
@@ -43,14 +42,14 @@ export const Sidebar = ({
     }
 
     // Summe für Durchschnitt
-    summeShare += monat.share;
+    summeAnteil += monat.anteil;
 
     // Gesamtzahlen
     gesamtKinder += monat.child;
     gesamtErwachsene += monat.adult;
   });
 
-  const durchschnittlicherKinderanteil = summeShare / daten.length;
+  const durchschnittlicherKinderanteil = summeAnteil / daten.length;
 
   return (
     <aside
@@ -67,7 +66,7 @@ export const Sidebar = ({
         <li>
           Höchster Kinderanteil:{" "}
           {monthNames[monatMitHoechstemKinderanteil.month - 1]} (
-          {(monatMitHoechstemKinderanteil.share * 100).toFixed(2)}%)
+          {(monatMitHoechstemKinderanteil.anteil * 100).toFixed(2)}%)
         </li>
         <li>
           Durchschnittlicher Kinderanteil:{" "}

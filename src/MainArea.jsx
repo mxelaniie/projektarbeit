@@ -23,7 +23,7 @@ export const MainArea = ({
             title: "Monat",
           },
           y: {
-            field: "share",
+            field: "anteil",
             type: "quantitative",
             title: "Kinderanteil",
             axis: { format: ".1%" },
@@ -34,7 +34,7 @@ export const MainArea = ({
             { field: "child", type: "quantitative", title: "Kinder" },
             { field: "adult", type: "quantitative", title: "Erwachsene" },
             {
-              field: "share",
+              field: "anteil",
               type: "quantitative",
               title: "Kinderanteil",
               format: ".2%",
@@ -49,7 +49,7 @@ export const MainArea = ({
             mark: { type: "text", dy: -10, color: "blue", fontWeight: "bold" },
             encoding: {
               x: { field: "month_name", type: "ordinal", sort: monthNames },
-              y: { field: "share", type: "quantitative" },
+              y: { field: "anteil", type: "quantitative" },
               text: { field: "temperature", type: "nominal" },
             },
           }
