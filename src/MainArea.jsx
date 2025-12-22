@@ -68,7 +68,7 @@ export const MainArea = ({
       }}
     >
       <h3>
-        Kinderanteil an Fußgängern in {selectedOrt} {selectedJahr}
+        Kinderanteil an Fussgängern in {selectedOrt} {selectedJahr}
       </h3>
       <VegaEmbed spec={Spec} options={{ mode: "vega-lite" }} />
     </main>
