@@ -8,6 +8,7 @@ export const MainArea = ({
   tempCheck,
   hintergrundEingabe,
 }) => {
+  // Beschreibung für das Diagramm
   const Spec = {
     data: { values: daten },
     layer: [
@@ -17,13 +18,13 @@ export const MainArea = ({
         encoding: {
           x: {
             field: "month_name",
-            type: "ordinal",
+            type: "ordinal", //geordnet, aber nicht numerisch
             sort: "month_name",
             title: "Monat",
           },
           y: {
             field: "anteil",
-            type: "quantitative",
+            type: "quantitative", // Zahlen, mit denen man rechnen kann
             title: "Kinderanteil",
             axis: { format: ".1%" },
           },

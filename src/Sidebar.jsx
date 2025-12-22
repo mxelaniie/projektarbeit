@@ -16,6 +16,7 @@ export const Sidebar = ({
     );
   }
 
+  // Variablen für Berechnungen
   let monatMitHoechstemKinderanteil = daten[0];
   let monatMitDenMeistenKindern = daten[0];
   let monatMitDenMeistenErwachsenen = daten[0];

@@ -3,8 +3,10 @@ export const Footer = () => {
     <footer>
       <span>
         Modul: 3050 WebDev & interaktive DataVis <br />
-        Datenquelle:
-        https://data.stadt-zuerich.ch/dataset/hystreet_fussgaengerfrequenzen{" "}
+        Datenquelle:{" "}
+        <a href="https://data.stadt-zuerich.ch/dataset/hystreet_fussgaengerfrequenzen">
+        https://data.stadt-zuerich.ch/dataset/hystreet_fussgaengerfrequenzen
+        </a>
         <br />
         Autoren: Alina Portmann, Melanie Schiefermüller <br />
         @2025
