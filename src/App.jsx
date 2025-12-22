@@ -11,40 +11,33 @@ export function App() {
     "https://upload.wikimedia.org/wikipedia/commons/a/af/Z%C3%BCrich.png";
   const [orte, setOrte] = useState([]);
   const [selectedOrt, setSelectedOrt] = useState("Bahnhofstrasse (Mitte)");
-  const [daten, setDaten] = useState([]);
   const backgroundColor = eingabe === "Dunkel" ? "#b4b4b4" : "";
   const jahre = ["2021", "2022", "2023", "2024", "2025"];
   const [selectedJahr, setSelectedJahr] = useState("2025");
   const [tempCheck, setTempCheck] = useState(false);
-  const [temp, setTemp] = useState(null);
+  const [monatDaten, setMonatDaten] = useState([]);
 
   // Orte laden
   useEffect(() => {
-    fetch("https://backend-rouge-gamma-83.vercel.app/orte")
+    fetch("http://localhost:8000/orte")
       .then((res) => res.json())
-      .then((data) => setOrte(data));
+      .then((data) => setOrte(data))
+      .catch((err) => console.error("Fehler beim Laden der Orte:", err));
   }, []);
 
-  // Daten für den ausgewählten Ort laden
+  // Monatsdaten laden (Kinderanteil + optional Temperatur)
   useEffect(() => {
+    if (!selectedOrt || !selectedJahr) return;
+
     fetch(
-      `https://backend-rouge-gamma-83.vercel.app/analyse/kinder_anteil?analyseort=${selectedOrt}`
+      `http://localhost:8000/analyse/kinderanteil_monat?analyseort=${encodeURIComponent(
+        selectedOrt
+      )}&jahr=${selectedJahr}&tempCheck=${tempCheck}`
     )
       .then((res) => res.json())
-      .then((data) => setDaten(data));
-  }, [selectedOrt]);
-
-  useEffect(() => {
-    if (selectedOrt) {
-      fetch(
-        `http://localhost:8000/analyse/temperaturen?analyseort=${encodeURIComponent(
-          selectedOrt
-        )}`
-      )
-        .then((res) => res.json())
-        .then((data) => setTemp(data));
-    }
-  }, [selectedOrt]);
+      .then((data) => setMonatDaten(data))
+      .catch((err) => console.error("Fehler beim Laden der Monatsdaten:", err));
+  }, [selectedOrt, selectedJahr, tempCheck]);
 
   return (
     <div className="app">
@@ -65,18 +58,17 @@ export function App() {
       <Sidebar
         eingabe={eingabe}
         backgroundColor={backgroundColor}
-        daten={daten}
+        daten={monatDaten}
         selectedJahr={selectedJahr}
         selectedOrt={selectedOrt}
         setSelectedOrt={setSelectedOrt}
       />
       <MainArea
         selectedOrt={selectedOrt}
-        daten={daten}
+        daten={monatDaten}
         backgroundColor={backgroundColor}
         selectedJahr={selectedJahr}
         tempCheck={tempCheck}
-        temp={temp}
       />
       <Footer backgroundColor={backgroundColor} />
     </div>
