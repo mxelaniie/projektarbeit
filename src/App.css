@@ -30,6 +30,8 @@ footer {
   align-items: center;
   justify-content: center;
   border: 1px solid black;
+  text-align: center;
+  padding: 20px;
 }
 
 aside {

@@ -1,12 +1,6 @@
 export const Footer = () => {
   return (
-    <footer
-      style={{
-        backgroundColor: "lightblue",
-        textAlign: "center",
-        padding: "20px",
-      }}
-    >
+    <footer>
       <span>
         Modul: 3050 WebDev & interaktive DataVis <br />
         Datenquelle:

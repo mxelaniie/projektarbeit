@@ -7,15 +7,14 @@ import { MainArea } from "./MainArea.jsx";
 
 export function App() {
   const [hintergrundEingabe, setHintergrundEingabe] = useState("");
-  const wappen =
-    "https://upload.wikimedia.org/wikipedia/commons/a/af/Z%C3%BCrich.png";
   const [orte, setOrte] = useState([]);
   const [selectedOrt, setSelectedOrt] = useState("Bahnhofstrasse (Mitte)");
-  const backgroundColor = hintergrundEingabe === "Dunkel" ? "#b4b4b4" : "";
-  const jahre = ["2021", "2022", "2023", "2024", "2025"];
   const [selectedJahr, setSelectedJahr] = useState("2025");
   const [tempCheck, setTempCheck] = useState(false);
   const [monatDaten, setMonatDaten] = useState([]);
+  const jahre = ["2021", "2022", "2023", "2024", "2025"];
+  const wappen =
+    "https://upload.wikimedia.org/wikipedia/commons/a/af/Z%C3%BCrich.png";
 
   // Orte laden
   useEffect(() => {
@@ -27,12 +26,8 @@ export function App() {
 
   // Monatsdaten laden (Kinderanteil + optional Temperatur)
   useEffect(() => {
-    if (!selectedOrt || !selectedJahr) return;
-
     fetch(
-      `http://localhost:8000/analyse/kinderanteil_monat?analyseort=${encodeURIComponent(
-        selectedOrt
-      )}&jahr=${selectedJahr}&tempCheck=${tempCheck}`
+      `http://localhost:8000/analyse/kinderanteil_monat?analyseort=${selectedOrt}&jahr=${selectedJahr}&tempCheck=${tempCheck}`
     )
       .then((res) => res.json())
       .then((data) => setMonatDaten(data))
@@ -47,7 +42,6 @@ export function App() {
         orte={orte}
         selectedOrt={selectedOrt}
         setSelectedOrt={setSelectedOrt}
-        backgroundColor={backgroundColor}
         jahre={jahre}
         selectedJahr={selectedJahr}
         setSelectedJahr={setSelectedJahr}
